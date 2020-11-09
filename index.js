@@ -28,11 +28,15 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   Study the code for counter1 and counter2, then answer the questions below.
   
   1. What is the difference between counter1 and counter2?
-  
+  Counter one is a variable that is assigned a function while counter is a function in itself. 
+
   2. Which of the two uses a closure? How can you tell?
-  
+  Counter1 uses closure because it is referencing a separate function. 
+
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+
+
 */
 
 // counter1 code
@@ -61,10 +65,8 @@ Use the inning function below to do the following:
   For example: invoking inning() should return a numerical score value of 0, 1, or 2
 */
 
-function inning(/*Code Here*/){
-
-    /*Code Here*/
-
+function inning(){
+    return Math.floor(Math.random() * Math.floor(3))
 }
 
 /* Task 3: finalScore()
@@ -80,11 +82,34 @@ For example: invoking finalScore(inning, 9) might return this object:
 }
 */ 
 
-function finalScore(/*code Here*/){
+// function baseball(inningCB){
+//   return {
+//     Home: inningCB(),
+//     Away: inningCB()
+//   }
+// }
 
-  /*Code Here*/
+function finalScore(inningCB,played){
+  let homeScore = 0;
+  let awayScore = 0;
 
+
+  for(let i = 0;i<played;i++){
+    const currentScore = {
+      Home: inningCB(),
+      Away: inningCB()
+    };
+    homeScore += currentScore.Home;
+    awayScore += currentScore.Away;
+    
+  }
+  return {
+    Away: awayScore,
+    Home: homeScore
+  };
 }
+
+console.log(finalScore(inning,9));
 
 /* Task 4: 
 // create a function called getInningScore 
