@@ -95,10 +95,10 @@ function finalScore(inningCB,played){
 
 
   for(let i = 0;i<played;i++){
-    const currentScore = {
+    const currentScore = getInningScore(inningCB)/*{
       Home: inningCB(),
       Away: inningCB()
-    };
+    };*/
     homeScore += currentScore.Home;
     awayScore += currentScore.Away;
     
@@ -109,16 +109,20 @@ function finalScore(inningCB,played){
   };
 }
 
-console.log(finalScore(inning,9));
+// console.log(finalScore(inning,9));
 
 /* Task 4: 
 // create a function called getInningScore 
 // the function should take the inning function as an argument 
 // it should return an object with with a score for home and a score for away that that populates from invoking the inning callback. */
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
+function getInningScore(inningCB) {
+  return {
+    Home: inningCB(),
+    Away: inningCB()
+  }
 }
+
 /* Task 5: scoreboard()
 Use the scoreboard function below to do the following:
   1. Receive a callback function, that you create, called `getInningScore`
@@ -163,11 +167,34 @@ Use the scoreboard function below to do the following:
   */
 
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(getInningScoreCB, inningCB,played) {
+  let final = [];
+  let homeScore = 0;
+  let awayScore = 0;
+
+  for(let i=0;i < played;i++){
+    let currentScore = getInningScoreCB(inningCB);
+    homeScore += currentScore.Home;
+    awayScore += currentScore.Away;
+    final.push(`Inning ${i+1}: Away ${awayScore} Home ${homeScore}`)
+  }
+  // let check = final[final.length - 1].slice(15,17);
+  // let check2 = final[final.length -1].slice(25);
+  if(homeScore === awayScore){
+    final.push(`This game will require extra innings: Away ${awayScore} Home ${homeScore}`)
+  } else {
+    final.push(`Final Score: Away ${awayScore} Home ${homeScore}`)
+  }
+  return final;
 }
 
-
+console.log(scoreboard(getInningScore,inning, 9));
+console.log(scoreboard(getInningScore,inning, 9));
+console.log(scoreboard(getInningScore,inning, 9));
+console.log(scoreboard(getInningScore,inning, 9));
+console.log(scoreboard(getInningScore,inning, 9));
+console.log(scoreboard(getInningScore,inning, 9));
+console.log(scoreboard(getInningScore,inning, 9));
 
 
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
